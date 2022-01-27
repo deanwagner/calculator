@@ -88,16 +88,23 @@ class Calculator {
             });
         }
 
+        // Display Welcome Message
         this.displayString('HELLO');
     }
 
+    /**
+     * Button Click Event Router
+     * @param {object} button - Button Clicked
+     */
     buttonEvent(button) {
         if (this.reset) {
+            // Reset LCD Screen
             this.reset   = false;
             this.decimal = false;
             this.display = '0';
         }
 
+        // Route Button Event
         switch (true) {
             case (button.id === 'btn_c'):
                 this.clear();
@@ -124,18 +131,25 @@ class Calculator {
                 this.input(button); 
         } 
 
+        // Display Result
         this.displayString(this.display);
     }
 
+    /**
+     * Handle Math Operations
+     * @param {string} op - Math Operator
+     */
     operate(op) {
         this.reset = true;
 
         if ((this.memory === null) || (this.operator === '')) {
+            // No Previous Input
             this.memory = parseInt(this.display);
             this.operator = op;
         } else {
             let result;
 
+            // Perform Operation
             switch (true) {
                 case (this.operator === '+'):
                     result = this.add(this.memory, parseInt(this.display));
@@ -154,12 +168,14 @@ class Calculator {
             }
 
             if (result === 'Error') {
+                // Handle Error
                 this.memory   = null;
                 this.display  = result;
                 this.reset    = true;
                 this.operator = '';
                 console.error('Invalid Operator');
             } else {
+                // Handle Result
                 if (op !== '=') {
                     this.operator = op;
                 } else {
@@ -171,24 +187,53 @@ class Calculator {
         }
     }
 
+    /**
+     * Adds 2 Numbers
+     * @param   {number} num1 - Augend
+     * @param   {number} num2 - Addend
+     * @returns {number} - Sum
+     */
     add(num1, num2) {
         return num1 + num2;
     }
 
+    /**
+     * Subtracts 2 Numbers
+     * @param   {number} num1 - Minuend
+     * @param   {number} num2 - Subtrahend
+     * @returns {number} - Difference
+     */
     subtract(num1, num2) {
         return num1 - num2;
     }
 
+    /**
+     * Multiplies 2 Numbers
+     * @param   {number} num1 - Multiplier
+     * @param   {number} num2 - Multiplicand
+     * @returns {number} - Product
+     */
     multiply(num1, num2) {
         return num1 * num2;
     }
 
+    /**
+     * Divides 2 Numbers
+     * @param   {number} num1 - Dividend
+     * @param   {number} num2 - Divisor
+     * @returns {number} - Quotient
+     */
     divide(num1, num2) {
         return num1 / num2;
     }
 
+    /**
+     * Handle User Input
+     * @param {object} button - Button Clicked
+     */
     input(button) {
         if (button.id === 'btn_p') {
+            // Decimal Point
             if (this.decimal !== true) {
                 if (this.display === '0') {
                     this.decimal = true;
@@ -200,6 +245,7 @@ class Calculator {
         } else if (button.id === 'btn_n') {
             // +/-
         } else {
+            // Digit
             if (this.display === '0') {
                 this.display = button.innerText;
             } else {
@@ -208,34 +254,48 @@ class Calculator {
         }
     }
 
+    /**
+     * Handle Equals Button Event
+     */
     equals() {
         if ((this.operator !== '') && (this.memory !== null)) {
             this.operate('=');
         }
     }
 
+    /**
+     * Clear Display and Memory
+     */
     clear() {
         this.display  = '0';
         this.memory   = null;
         this.operator = '';
     }
 
+    /**
+     * Remove Last Character
+     */
     back() {
         if (this.display.length > 1) {
             this.display = this.display.slice(0, -1);
         } else {
             this.display = '0';
         }
-        
     }
 
+    /**
+     * Display String
+     * @param {string} str - String to Display
+     */
     displayString(str) {
         this.displayClear();
 
+        // Empty String
         if (str === '') {
             str = '0';
         }
 
+        // String Too Large to Display
         if (str.length > this.maxDigits) {
             this.memory   = null;
             this.reset    = true;
@@ -244,8 +304,10 @@ class Calculator {
             console.warn('Number Too Large');
         }
 
+        // Reverse String
         let digits = str.toString().split('').reverse();
 
+        // Add each Character to LCD Screen
         for (let i = 0; i < digits.length; i++) {
             if (typeof this.matrix[digits[i]] !== 'undefined') {
                 this.displayDigit(this.matrix[digits[i]], i);
@@ -253,22 +315,37 @@ class Calculator {
         }
     }
 
+    /**
+     * Add Character to LCD Screen
+     * @param {array}  digit - Pixel Matrix of Character
+     * @param {number} place - Position on Screen
+     */
     displayDigit(digit, place) {
+        // Loop through Pixel Matrix
         digit.forEach((value, index) => {
+            // Get Pixel Name
             const elm = document.getElementById(this.pixels[index] + '_' + place);
+
+            // Alter Pixel
             if (this.pixels[index] === 'point') {
+                // Decimal Point
                 if (value) {
+                    // Pixel On
                     elm.classList.remove('lcd_off');
                     elm.classList.add('lcd_show');
                 } else {
+                    // Pixel Off
                     elm.classList.remove('lcd_show');
                     elm.classList.add('lcd_off');
                 } 
             } else {
+                // Character
                 if (value) {
+                    // Pixel On
                     elm.classList.remove('lcd_hide');
                     elm.classList.add('lcd_show');
                 } else {
+                    // Pixel Off
                     elm.classList.remove('lcd_show');
                     elm.classList.add('lcd_hide');
                 } 
@@ -276,15 +353,24 @@ class Calculator {
         });
     }
 
+    /**
+     * Clear Display
+     */
     displayClear() {
+        // Loop through all Digits
         for (let i = 0; i < this.maxDigits; i++) {
+            // Loop through Pixel Names
             for (let ii = 0; ii < this.pixels.length; ii++) {
+                // Get Pixel
                 const elm = document.getElementById(this.pixels[ii] + '_' + i);
-                
+
+                // Kill Pixel
                 if (this.pixels[ii] === 'point') {
+                    // Decimal Point
                     elm.classList.remove('lcd_show');
                     elm.classList.add('lcd_off');
                 } else {
+                    // Digit
                     elm.classList.remove('lcd_show');
                     elm.classList.add('lcd_hide');
                 }

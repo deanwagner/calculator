@@ -1,7 +1,23 @@
+
+/* * * * * * * * * * * *\
+ *   LCD Calculator    *
+ *                     *
+ *  By: Dean Wagner    *
+ *  me@deanwagner.net  *
+ *                     *
+ *   Assignment for:   *
+ *  The Odin Project   *
+ * theodinproject.com  *
+\* * * * * * * * * * * */
+
 * {
     box-sizing: border-box;
     cursor: default;
 }
+
+/* * * * * * * * *\
+ * Element Base  *
+\* * * * * * * * */
 
 html, body {
     font-size: 2vmin;
@@ -34,6 +50,10 @@ a:hover, a:focus, a:active {
     text-shadow: 0 0 0.2em #fff;
 }
 
+/* * * * * * * * *\
+ *  GitHub Icon  *
+\* * * * * * * * */
+
 .github-link {
     transition: all 0.3s ease-out;
 }
@@ -58,6 +78,10 @@ a:hover, a:focus, a:active {
     fill: #f4f4f4;
 }
 
+/* * * * * * * * *\
+ *   Main Grid   *
+\* * * * * * * * */
+
 main {
     display: grid;
     grid-gap: 1em;
@@ -67,6 +91,10 @@ main {
     padding: 1em 2em 0;
     width: auto;
 }
+
+/* * * * * * * * *\
+ *  Page Header  *
+\* * * * * * * * */
 
 header {
     display: flex;
@@ -88,6 +116,10 @@ header .github-icon {
     width: 1.6em;
 }
 
+/* * * * * * * * *\
+ *  LCD Screen   *
+\* * * * * * * * */
+
 #lcd_screen {
     align-items: center;
     background-color: #7d8c73;
@@ -102,9 +134,7 @@ header .github-icon {
     grid-row: 2;
     justify-content: center;
     margin: 0;
-    outline-color: rgba(255,255,255,0.5);
-    outline-style: solid;
-    outline-width: 2px;
+    outline: rgba(255, 255, 255, 0.5) solid 2px;
     padding: 2em;
 }
 
@@ -128,6 +158,10 @@ header .github-icon {
     transition: opacity 0.3s ease-out;
 }
 
+/* * * * * * * * *\
+ * Input Buttons *
+\* * * * * * * * */
+
 button {
     background-image: linear-gradient(to bottom right, rgba(0,0,0,0),rgba(0,0,0,0.3));
     background-color: #bababa;
@@ -141,9 +175,7 @@ button {
     display: block;
     font-size: 3em;
     height: 10vh;
-    outline-color: rgba(255,255,255,0.5);
-    outline-style: solid;
-    outline-width: 2px;
+    outline: rgba(255, 255, 255, 0.5) solid 2px;
     text-shadow:
         -1px -1px 0 rgba(0,0,0,0.4),  
         1px -1px 0 rgba(0,0,0,0.4),
@@ -214,6 +246,10 @@ button.press {
 #btn_0 { grid-column: 2; grid-row: 7; }
 #btn_p { grid-column: 3; grid-row: 7; }
 #btn_e { grid-column: 4; grid-row: 7; }
+
+/* * * * * * * * *\
+ *  Page Footer  *
+\* * * * * * * * */
 
 footer {
     font-size: 0.8em;
