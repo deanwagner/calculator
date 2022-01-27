@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LCD Calculator</title>
-    <link rel="icon" href="./img/calc-icon.png">
+    <link rel="icon" href="./img/lcd.png">
     <link rel="stylesheet" href="./res/calculator.css">
     <script src="./res/calculator.js" defer></script>
     <script>
@@ -26,7 +26,7 @@
                         <feDropShadow dx="1" dy="1" stdDeviation="1" flood-color="#000000" flood-opacity="0.8" />
                     </filter>
                 </defs>
-                <g class="lcd_whole">
+                <g class="lcd_pixels">
                     <polygon id="topCenter" class="lcd_hide" points="33 12 41 4 37 0 10 0 6 4 14 12 33 12"/>
                     <polygon id="topLeft"   class="lcd_hide" points="4 41 12 33 12 14 4 6 0 10 0 37 4 41"/>
                     <polygon id="topRight"  class="lcd_hide" points="43 41 47 37 47 10 43 6 35 14 35 33 43 41"/>
@@ -58,8 +58,9 @@
         <button id="btn_3">3</button>
         <button id="btn_a">+</button>
         
-        <button id="btn_p">.</button>
+        <button id="btn_n">⁺/₋</button>
         <button id="btn_0">0</button>
+        <button id="btn_p">.</button>
         <button id="btn_e">=</button>
 
         <footer>

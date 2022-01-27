@@ -73,7 +73,7 @@ header {
     justify-content: space-between;
     grid-column: 1 / span 4; 
     grid-row: 1;
-    padding: 0 2em;
+    padding: 0 1em;
 }
 
 h1 {
@@ -108,7 +108,7 @@ header .github-icon {
     padding: 2em;
 }
 
-#lcd_screen .lcd_whole {
+#lcd_screen .lcd_pixels {
     fill: #000000;
 }
 
@@ -210,9 +210,10 @@ button.press {
 #btn_2 { grid-column: 2; grid-row: 6; }
 #btn_3 { grid-column: 3; grid-row: 6; }
 #btn_a { grid-column: 4; grid-row: 6; }
-#btn_p { grid-column: 1; grid-row: 7; }
+#btn_n { grid-column: 1; grid-row: 7; }
 #btn_0 { grid-column: 2; grid-row: 7; }
-#btn_e { grid-column: 3 / span 2; grid-row: 7; }
+#btn_p { grid-column: 3; grid-row: 7; }
+#btn_e { grid-column: 4; grid-row: 7; }
 
 footer {
     font-size: 0.8em;

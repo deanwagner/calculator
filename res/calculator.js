@@ -55,6 +55,7 @@ class Calculator {
         this.memory    = null;
         this.operator  = '';
         this.reset     = false;
+        this.decimal   = false;
 
         // Get SVG Template
         this.screen   = document.getElementById('lcd_screen');
@@ -69,7 +70,7 @@ class Calculator {
 
             // Assign IDs
             svg.id = svg.id + '_' + i;
-            const ids = svg.querySelectorAll('.lcd_whole > *');
+            const ids = svg.querySelectorAll('.lcd_pixels > *');
             for (let ii = 0; ii < ids.length; ii++) {
                 ids[ii].id = ids[ii].id + '_' + i;
             }
@@ -93,88 +94,44 @@ class Calculator {
     buttonEvent(button) {
         if (this.reset) {
             this.reset   = false;
+            this.decimal = false;
             this.display = '0';
         }
 
         switch (true) {
             case (button.id === 'btn_c'):
-                this.btnClear();
+                this.clear();
                 break;
             case (button.id === 'btn_b'):
-                this.btnBack();
+                this.back();
                 break;
             case (button.id === 'btn_a'):
-                this.btnAdd();
+                this.operate('+');
                 break;
             case (button.id === 'btn_s'):
-                this.btnSubtract();
+                this.operate('-');
                 break;
             case (button.id === 'btn_m'):
-                this.btnMultiply();
+                this.operate('*');
                 break;
             case (button.id === 'btn_d'):
-                this.btnDivide();
+                this.operate('/');
                 break;
             case (button.id === 'btn_e'):
-                this.btnEquals();
+                this.equals();
                 break;
             default:
-                this.btnInput(button); 
+                this.input(button); 
         } 
 
         this.displayString(this.display);
-    }
-
-    btnInput(button) {
-        if (this.display === '0') {
-            this.display = button.innerText;
-        } else {
-            this.display += button.innerText;
-        }
-    }
-
-    btnClear() {
-        this.display  = '0';
-        this.memory   = null;
-        this.operator = '';
-    }
-
-    btnBack() {
-        if (this.display.length > 1) {
-            this.display = this.display.slice(0, -1);
-        } else {
-            this.display = '0';
-        }
-        
-    }
-
-    btnEquals() {
-        if ((this.operator !== '') && (this.memory !== null)) {
-            this.operate('=');
-        }
-    }
-
-    btnAdd() {
-        this.operate('+');
-    }
-
-    btnSubtract() {
-        this.operate('-');
-    }
-
-    btnMultiply() {
-        this.operate('*');
-    }
-
-    btnDivide() {
-        this.operate('/');
     }
 
     operate(op) {
         this.reset = true;
 
         if ((this.memory === null) || (this.operator === '')) {
-            this.memory   = parseInt(this.display);
+            this.memory = parseInt(this.display);
             this.operator = op;
         } else {
             let result;
@@ -205,6 +162,8 @@ class Calculator {
             } else {
                 if (op !== '=') {
                     this.operator = op;
+                } else {
+                    this.operator = '';
                 }
                 this.memory  = result; 
                 this.display = result.toString(); 
@@ -226,6 +185,48 @@ class Calculator {
 
     divide(num1, num2) {
         return num1 / num2;
+    }
+
+    input(button) {
+        if (button.id === 'btn_p') {
+            if (this.decimal !== true) {
+                if (this.display === '0') {
+                    this.decimal = true;
+                    this.display = '0.';
+                } else {
+                    this.display += button.innerText;
+                }
+            }
+        } else if (button.id === 'btn_n') {
+            // +/-
+        } else {
+            if (this.display === '0') {
+                this.display = button.innerText;
+            } else {
+                this.display += button.innerText;
+            }
+        }
+    }
+
+    equals() {
+        if ((this.operator !== '') && (this.memory !== null)) {
+            this.operate('=');
+        }
+    }
+
+    clear() {
+        this.display  = '0';
+        this.memory   = null;
+        this.operator = '';
+    }
+
+    back() {
+        if (this.display.length > 1) {
+            this.display = this.display.slice(0, -1);
+        } else {
+            this.display = '0';
+        }
+        
     }
 
     displayString(str) {
