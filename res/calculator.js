@@ -142,9 +142,12 @@ class Calculator {
     operate(op) {
         this.reset = true;
 
+        // Parse Screen Value
+        const screen = (this.decimal) ? parseFloat(this.display) : parseInt(this.display);
+
         if ((this.memory === null) || (this.operator === '')) {
             // No Previous Input
-            this.memory = parseInt(this.display);
+            this.memory = screen;
             this.operator = op;
         } else {
             let result;
@@ -152,19 +155,33 @@ class Calculator {
             // Perform Operation
             switch (true) {
                 case (this.operator === '+'):
-                    result = this.add(this.memory, parseInt(this.display));
+                    result = this.add(this.memory, screen);
                     break;
                 case (this.operator === '-'):
-                    result = this.subtract(this.memory, parseInt(this.display));
+                    result = this.subtract(this.memory, screen);
                     break;
                 case (this.operator === '*'):
-                    result = this.multiply(this.memory, parseInt(this.display));
+                    result = this.multiply(this.memory, screen);
                     break;
                 case (this.operator === '/'):
-                    result = this.divide(this.memory, parseInt(this.display));
+                    result = this.divide(this.memory, screen);
                     break;
                 default:
                     result = 'Error';
+            }
+
+            // Debug - Activate with #debug at end of URL
+            if (window.location.hash === '#debug') {
+                const debug = {
+                    Decimal  : this.decimal,
+                    Display  : this.display,
+                    Parsed   : screen,
+                    Memory   : this.memory,
+                    Operator : this.operator,
+                    Result   : result,
+                    String   : result.toString()
+                };
+                console.table(debug);
             }
 
             if (result === 'Error') {
@@ -235,19 +252,22 @@ class Calculator {
         if (button.id === 'btn_p') {
             // Decimal Point
             if (this.decimal !== true) {
-                if (this.display === '0') {
-                    this.decimal = true;
-                    this.display = '0.';
-                } else {
-                    this.display += button.innerText;
-                }
+                this.decimal = true;
+                this.display += button.innerText;
             }
         } else if (button.id === 'btn_n') {
             // +/-
+            if (this.display.charAt(0) === '-') {
+                this.display = this.display.substr(1);
+            } else {
+                this.display = '-' + this.display;
+            }
         } else {
             // Digit
             if (this.display === '0') {
                 this.display = button.innerText;
+            } else if (this.display === '-0') {
+                this.display = '-' + button.innerText;
             } else {
                 this.display += button.innerText;
             }
