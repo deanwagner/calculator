@@ -61,7 +61,6 @@ a:hover, a:focus, a:active {
 .github-link:hover,
 .github-link:focus {
     transform: rotate(360deg) scale(1.5);
-    transition: all 0.3s ease-out;
 }
 
 .github-icon {
