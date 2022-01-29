@@ -60,13 +60,15 @@ a:hover, a:focus, a:active {
 
 .github-link:hover,
 .github-link:focus {
-    transform: scale(1.5);
+    transform: rotate(360deg) scale(1.5);
     transition: all 0.3s ease-out;
 }
 
 .github-icon {
     filter: drop-shadow(0.1em 0.1em 0.1em #000);
+    height: 1.6em;
     transition: all 0.3s ease-out;
+    width: 1.6em;
 }
 
 .github-link:hover .github-icon,
@@ -112,8 +114,6 @@ h1 {
 }
 
 header .github-icon {
-    height: 1.6em;
-    width: 1.6em;
 }
 
 /* * * * * * * * *\
