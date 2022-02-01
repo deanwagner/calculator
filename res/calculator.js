@@ -305,7 +305,7 @@ class Calculator {
 
     /**
      * Handle User Input
-     * @param {object} value - Button Clicked
+     * @param {object} value - Input Value
      */
     input(value) {
         if (value === '.') {
