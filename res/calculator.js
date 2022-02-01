@@ -49,6 +49,14 @@ class Calculator {
         this.matrix['.'] = [ 0, 0, 0, 0, 0, 0, 0, 1 ];
         this.matrix['-'] = [ 0, 0, 0, 1, 0, 0, 0, 0 ];
 
+        // Valid Keyboard Inputs
+        this.keys = [
+            '1', '2', '3', '4', '5', 
+            '6', '7', '8', '9', '0',
+            '+', '-', '*', '/', '.', 
+            'Enter', 'Backspace', 'Delete'
+        ];
+
         // Class Properties
         this.maxDigits = 10;
         this.display   = '0';
@@ -79,7 +87,7 @@ class Calculator {
             this.screen.prepend(svg);
         }
 
-        // Event Listener
+        // Button Event Listeners
         this.buttons = document.getElementsByTagName('button');
         for (let i = 0; i < this.buttons.length; i++) {
             this.buttons[i].addEventListener('click', (e) => {
@@ -88,8 +96,69 @@ class Calculator {
             });
         }
 
+        // Keyboard Event Listeners
+        document.addEventListener('keydown', (e) => {
+            if (this.keys.includes(e.key)) {
+                // Add Animation Class
+                const btn = document.getElementById(this.getID(e.key));
+                if (btn !== 'undefined') {
+                    btn.classList.add('press');
+                }
+            }
+        });
+        document.addEventListener('keyup', (e) => {
+            if (this.keys.includes(e.key)) {
+                // Rout Input Event
+                this.keyboardEvent(e);
+            }
+        });
+
         // Display Welcome Message
         this.displayString('HELLO');
+    }
+
+    /**
+     * Keyboard Event Router
+     * @param {object} event - Keyup Event
+     */
+    keyboardEvent(event) {
+        this.resetLCD();
+
+        // Route Button Event
+        switch (true) {
+            case (event.key === 'Delete'):
+                this.clear();
+                break;
+            case (event.key === 'Backspace'):
+                this.back();
+                break;
+            case (event.key === '+'):
+                this.operate('+');
+                break;
+            case (event.key === '-'):
+                this.operate('-');
+                break;
+            case (event.key === '*'):
+                this.operate('*');
+                break;
+            case (event.key === '/'):
+                this.operate('/');
+                break;
+            case (event.key === 'Enter'):
+                this.equals();
+                break;
+            default:
+                this.input(event.key); 
+        } 
+
+        // Display Result
+        this.displayString(this.display);
+
+        // Remove Animation Class
+        const btn = document.getElementById(this.getID(event.key));
+        if (btn !== 'undefined') {
+            btn.classList.remove('press');
+        }
     }
 
     /**
@@ -97,12 +166,7 @@ class Calculator {
      * @param {object} button - Button Clicked
      */
     buttonEvent(button) {
-        if (this.reset) {
-            // Reset LCD Screen
-            this.reset   = false;
-            this.decimal = false;
-            this.display = '0';
-        }
+        this.resetLCD();
 
         // Route Button Event
         switch (true) {
@@ -128,7 +192,7 @@ class Calculator {
                 this.equals();
                 break;
             default:
-                this.input(button); 
+                this.input(button.innerText); 
         } 
 
         // Display Result
@@ -246,16 +310,16 @@ class Calculator {
 
     /**
      * Handle User Input
-     * @param {object} button - Button Clicked
+     * @param {object} value - Button Clicked
      */
-    input(button) {
-        if (button.id === 'btn_p') {
+    input(value) {
+        if (value === '.') {
             // Decimal Point
             if (this.decimal !== true) {
                 this.decimal = true;
-                this.display += button.innerText;
+                this.display += value;
             }
-        } else if (button.id === 'btn_n') {
+        } else if (value === '⁺/₋') {
             // +/-
             if (this.display.charAt(0) === '-') {
                 this.display = this.display.substr(1);
@@ -265,11 +329,11 @@ class Calculator {
         } else {
             // Digit
             if (this.display === '0') {
-                this.display = button.innerText;
+                this.display = value;
             } else if (this.display === '-0') {
-                this.display = '-' + button.innerText;
+                this.display = '-' + value;
             } else {
-                this.display += button.innerText;
+                this.display += value;
             }
         }
     }
@@ -395,6 +459,44 @@ class Calculator {
                     elm.classList.add('lcd_hide');
                 }
             }
+        }
+    }
+
+    /**
+     * Reset LCD
+     */
+    resetLCD() {
+        if (this.reset) {
+            // Reset LCD Screen
+            this.reset   = false;
+            this.decimal = false;
+            this.display = '0';
+        }
+    }
+
+    /**
+     * Get Button ID from Keystroke
+     */
+    getID(key) {
+        switch (true) {
+            case (key === 'Delete'):
+                return 'btn_c';
+            case (key === 'Backspace'):
+                return 'btn_b';
+            case (key === '+'):
+                return 'btn_a';
+            case (key === '-'):
+                return 'btn_s';
+            case (key === '*'):
+                return 'btn_m';
+            case (key === '/'):
+                return 'btn_d';
+            case (key === '.'):
+                return 'btn_p';
+            case (key === 'Enter'):
+                return 'btn_e';
+            default:
+                return 'btn_' + key;
         }
     }
 }
