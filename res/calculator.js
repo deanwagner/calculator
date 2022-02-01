@@ -110,6 +110,12 @@ class Calculator {
             if (this.keys.includes(e.key)) {
                 // Rout Input Event
                 this.keyboardEvent(e);
+
+                // Remove Animation Class
+                const btn = document.getElementById(this.getID(e.key));
+                if (btn !== 'undefined') {
+                    btn.classList.remove('press');
+                }
             }
         });
 
@@ -153,12 +159,6 @@ class Calculator {
 
         // Display Result
         this.displayString(this.display);
-
-        // Remove Animation Class
-        const btn = document.getElementById(this.getID(event.key));
-        if (btn !== 'undefined') {
-            btn.classList.remove('press');
-        }
     }
 
     /**
@@ -250,20 +250,15 @@ class Calculator {
 
             if (result === 'Error') {
                 // Handle Error
+                this.operator = '';
                 this.memory   = null;
                 this.display  = result;
-                this.reset    = true;
-                this.operator = '';
                 console.error('Invalid Operator');
             } else {
                 // Handle Result
-                if (op !== '=') {
-                    this.operator = op;
-                } else {
-                    this.operator = '';
-                }
-                this.memory  = result; 
-                this.display = result.toString(); 
+                this.operator = (op !== '=') ? op : '';
+                this.memory   = result; 
+                this.display  = result.toString(); 
             }
         }
     }
@@ -463,11 +458,10 @@ class Calculator {
     }
 
     /**
-     * Reset LCD
+     * Reset LCD Screen
      */
     resetLCD() {
         if (this.reset) {
-            // Reset LCD Screen
             this.reset   = false;
             this.decimal = false;
             this.display = '0';
@@ -476,6 +470,8 @@ class Calculator {
 
     /**
      * Get Button ID from Keystroke
+     * @param   {string} key - Key Value
+     * @returns {string} - Button ID
      */
     getID(key) {
         switch (true) {
