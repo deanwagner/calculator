@@ -32,7 +32,7 @@ class Calculator {
             [ 1, 0, 1, 1, 0, 1, 1, 0 ], // 3
             [ 0, 1, 1, 1, 0, 1, 0, 0 ], // 4
             [ 1, 1, 0, 1, 0, 1, 1, 0 ], // 5
-            [ 1, 1, 0, 1, 1, 1, 1, 0 ], // 6 
+            [ 1, 1, 0, 1, 1, 1, 1, 0 ], // 6
             [ 1, 0, 1, 0, 0, 1, 0, 0 ], // 7
             [ 1, 1, 1, 1, 1, 1, 1, 0 ], // 8
             [ 1, 1, 1, 1, 0, 1, 1, 0 ]  // 9
@@ -48,7 +48,7 @@ class Calculator {
         this.matrix['O'] = [ 1, 1, 1, 0, 1, 1, 1, 0 ];
         this.matrix['.'] = [ 0, 0, 0, 0, 0, 0, 0, 1 ];
         this.matrix['-'] = [ 0, 0, 0, 1, 0, 0, 0, 0 ];
-        
+
         // Class Properties
         this.maxDigits = 10;
         this.display   = '0';
@@ -173,13 +173,13 @@ class Calculator {
             // Debug - Activate with #debug at end of URL
             if (window.location.hash === '#debug') {
                 const debug = {
-                    Decimal  : this.decimal,
-                    Display  : this.display,
-                    Parsed   : screen,
-                    Memory   : this.memory,
-                    Operator : this.operator,
-                    Result   : result,
-                    String   : result.toString()
+                    'Decimal'  : this.decimal,
+                    'Display'  : this.display,
+                    'Parsed'   : screen,
+                    'Memory'   : this.memory,
+                    'Operator' : this.operator,
+                    'Result'   : result,
+                    'String'   : result.toString()
                 };
                 console.table(debug);
             }
