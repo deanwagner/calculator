@@ -1,6 +1,6 @@
 {
-    "short_name"  : "Calculator",
     "name"        : "LCD Calculator",
+    "short_name"  : "Calculator",
     "description" : "A simple calculator with an LCD display.",
     "icons"       : [{
         "src"   : "img/calculator.svg",
