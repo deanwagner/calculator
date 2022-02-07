@@ -1,0 +1,28 @@
+{
+    "short_name" : "Calculator",
+    "name"       : "LCD Calculator",
+    "icons"      : [{
+        "src"   : "img/calculator.svg",
+        "type"  : "image/svg+xml",
+        "sizes" : "any"
+    }, {
+        "src"   : "img/calculator-192.png",
+        "type"  : "image/png",
+        "sizes" : "192x192"
+    }, {
+        "src"   : "img/calculator-512.png",
+        "type"  : "image/png",
+        "sizes" : "512x512"
+    }],
+    "start_url"        : "index.html",
+    "background_color" : "#666666",
+    "theme_color"      : "#333333",
+    "display"          : "standalone",
+    "scope"            : "/",
+    "description"      : "A simple calculator with an LCD display.",
+    "screenshots"      : [{
+        "src"   : "/img/calculator-screenshot.png",
+        "type"  : "image/png",
+        "sizes" : "650x365"
+    }]
+}
