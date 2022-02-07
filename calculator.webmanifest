@@ -21,7 +21,7 @@
     "display"          : "standalone",
     "scope"            : "/",
     "screenshots"      : [{
-        "src"   : "/img/calculator-screenshot.png",
+        "src"   : "img/calculator-screenshot.png",
         "type"  : "image/png",
         "sizes" : "650x365"
     }]
