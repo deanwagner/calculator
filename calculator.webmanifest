@@ -1,7 +1,8 @@
 {
-    "short_name" : "Calculator",
-    "name"       : "LCD Calculator",
-    "icons"      : [{
+    "short_name"  : "Calculator",
+    "name"        : "LCD Calculator",
+    "description" : "A simple calculator with an LCD display.",
+    "icons"       : [{
         "src"   : "img/calculator.svg",
         "type"  : "image/svg+xml",
         "sizes" : "any"
@@ -19,7 +20,6 @@
     "theme_color"      : "#333333",
     "display"          : "standalone",
     "scope"            : "/",
-    "description"      : "A simple calculator with an LCD display.",
     "screenshots"      : [{
         "src"   : "/img/calculator-screenshot.png",
         "type"  : "image/png",
