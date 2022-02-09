@@ -18,16 +18,16 @@ The most noteworthy aspect of this project is the faux liquid crystal display. R
 
 1. Function for each math operator
 2. Operator function that takes an operator and calls one of previous functions
-3. Display with `<button>` for each digit, operation function, clear, and 'equals'
+3. Display with button for each digit, operation function, 'clear', and 'equals'
 4. Functions to populate display
 5. String multiple operations together (12 + 7 - 5 * 3 = 42)
 6. Do not evaluate more than one pair of numbers at a time
 7. Round long decimal numbers to avoid overflow
-8. `<Clear>` button should wipe all existing data
+8. 'Clear' button should wipe all existing data
 9. Error message for divide-by-zero
 10. Decimal button for floating point numbers
 11. Different colors for operation and number buttons
-12. `<Backspace>` button for wrong entries
+12. 'Backspace' button for wrong entries
 13. Keyboard support
 
 ### Scope Creep
