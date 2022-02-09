@@ -33,6 +33,6 @@ The most noteworthy aspect of this project is the faux liquid crystal display. R
 ### Scope Creep
 
 * __LCD Display__ utilizing inline SVG images
-* `<+/->` button for negative integers
+* `[+/-]` button for negative integers
 * Responsive Design
 * PWA and A2HS support
