@@ -7,22 +7,39 @@
  */
 class Calculator {
 
+    // Class Properties
+    maxDigits = 10;
+    display   = '0';
+    memory    = null;
+    operator  = '';
+    reset     = false;
+    decimal   = false;
+
+    // LCD Pixel Names
+    pixels = [
+        'topCenter',
+        'topLeft',
+        'topRight',
+        'midCenter',
+        'botLeft',
+        'botRight',
+        'botCenter',
+        'point'
+    ];
+
+    // Valid Keyboard Inputs
+    keys = [
+        '1', '2', '3', '4', '5',
+        '6', '7', '8', '9', '0',
+        '+', '-', '*', '/', '.',
+        'Enter', 'Backspace', 'Delete'
+    ];
+
     /**
      * Constructor
      * @constructor
      */
     constructor() {
-        // LCD Pixel Names
-        this.pixels = [
-            'topCenter',
-            'topLeft',
-            'topRight',
-            'midCenter',
-            'botLeft',
-            'botRight',
-            'botCenter',
-            'point'
-        ];
 
         // LCD Pixel Matrix: Numbers
         this.matrix = [
@@ -49,32 +66,16 @@ class Calculator {
         this.matrix['.'] = [ 0, 0, 0, 0, 0, 0, 0, 1 ];
         this.matrix['-'] = [ 0, 0, 0, 1, 0, 0, 0, 0 ];
 
-        // Valid Keyboard Inputs
-        this.keys = [
-            '1', '2', '3', '4', '5', 
-            '6', '7', '8', '9', '0',
-            '+', '-', '*', '/', '.', 
-            'Enter', 'Backspace', 'Delete'
-        ];
-
-        // Class Properties
-        this.maxDigits = 10;
-        this.display   = '0';
-        this.memory    = null;
-        this.operator  = '';
-        this.reset     = false;
-        this.decimal   = false;
-
         // Get SVG Template
-        this.screen   = document.getElementById('lcd_screen');
-        const baseSVG = document.getElementById('lcd_digit');
-        this.newSVG   = baseSVG.cloneNode(true);
-        this.screen.innerHTML = '';
+        const screen   = document.getElementById('lcd_screen');
+        const baseSVG  = document.getElementById('lcd_digit');
+        const newSVG   = baseSVG.cloneNode(true);
+        screen.innerHTML = '';
 
         // Build LCD Screen from SVG Template
         for (let i = 0; i < this.maxDigits; i++) {
             // Clone SVG Template
-            const svg = this.newSVG.cloneNode(true);
+            const svg = newSVG.cloneNode(true);
 
             // Assign IDs
             svg.id = svg.id + '_' + i;
@@ -84,13 +85,13 @@ class Calculator {
             }
 
             // Add to DOM
-            this.screen.prepend(svg);
+            screen.prepend(svg);
         }
 
         // Button Event Listeners
-        this.buttons = document.getElementsByTagName('button');
-        for (let i = 0; i < this.buttons.length; i++) {
-            this.buttons[i].addEventListener('click', (e) => {
+        const buttons = document.getElementsByTagName('button');
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', (e) => {
                 // Handle Button Click Event
                 this.buttonEvent(e.target);
             });
@@ -101,7 +102,7 @@ class Calculator {
             if (this.keys.includes(e.key)) {
                 // Add Animation Class
                 const btn = document.getElementById(this.getID(e.key));
-                if (btn !== 'undefined') {
+                if (typeof btn !== 'undefined') {
                     btn.classList.add('press');
                 }
             }
@@ -113,7 +114,7 @@ class Calculator {
 
                 // Remove Animation Class
                 const btn = document.getElementById(this.getID(e.key));
-                if (btn !== 'undefined') {
+                if (typeof btn !== 'undefined') {
                     btn.classList.remove('press');
                 }
             }
@@ -317,7 +318,7 @@ class Calculator {
         } else if (value === '⁺/₋') {
             // +/-
             if (this.display.charAt(0) === '-') {
-                this.display = this.display.substr(1);
+                this.display = this.display.substring(1);
             } else {
                 this.display = '-' + this.display;
             }
