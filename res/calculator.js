@@ -14,6 +14,7 @@ class Calculator {
     operator  = '';
     reset     = false;
     decimal   = false;
+    finished  = false;
 
     // LCD Pixel Names
     pixels = [
@@ -205,14 +206,13 @@ class Calculator {
      * @param {string} op - Math Operator
      */
     operate(op) {
-        this.reset = true;
-
         // Parse Screen Value
         const screen = (this.decimal) ? parseFloat(this.display) : parseInt(this.display);
 
         if ((this.memory === null) || (this.operator === '')) {
             // No Previous Input
-            this.memory = screen;
+            this.reset    = true;
+            this.memory   = screen;
             this.operator = op;
         } else {
             let result;
@@ -229,14 +229,14 @@ class Calculator {
                     result = this.multiply(this.memory, screen);
                     break;
                 case (this.operator === '/'):
-                    result = this.divide(this.memory, screen);
-                    break;
+                    result = (screen === 0) ? 'Error' : this.divide(this.memory, screen);
+                    break; // ^ Divide-by-Zero Check ^
                 default:
                     result = 'Error';
             }
 
             // Debug - Activate with #debug at end of URL
-            if (window.location.hash === '#debug') {
+            if (window.location.hash === 'debug') {
                 const debug = {
                     'Decimal'  : this.decimal,
                     'Display'  : this.display,
@@ -251,15 +251,26 @@ class Calculator {
 
             if (result === 'Error') {
                 // Handle Error
+                this.reset    = true;
                 this.operator = '';
                 this.memory   = null;
                 this.display  = result;
-                console.error('Invalid Operator');
             } else {
                 // Handle Result
-                this.operator = (op !== '=') ? op : '';
-                this.memory   = result; 
-                this.display  = result.toString(); 
+                this.memory   = result;
+                this.display  = result.toString();
+
+                if (op === '=') {
+                    // Operation Finished
+                    this.finished = true;
+                    this.reset    = false;
+                    this.operator = '';
+                } else {
+                    // Continue Operation
+                    this.finished = false;
+                    this.reset    = true;
+                    this.operator = op;
+                }
             }
         }
     }
@@ -313,7 +324,12 @@ class Calculator {
             // Decimal Point
             if (this.decimal !== true) {
                 this.decimal = true;
-                this.display += value;
+                if (this.finished) {
+                    this.finished = false;
+                    this.display  = value;
+                } else {
+                    this.display += value;
+                }
             }
         } else if (value === '⁺/₋') {
             // +/-
@@ -329,7 +345,12 @@ class Calculator {
             } else if (this.display === '-0') {
                 this.display = '-' + value;
             } else {
-                this.display += value;
+                if (this.finished) {
+                    this.finished = false;
+                    this.display  = value;
+                } else {
+                    this.display += value;
+                }
             }
         }
     }
@@ -377,11 +398,18 @@ class Calculator {
 
         // String Too Large to Display
         if (str.length > this.maxDigits) {
-            this.memory   = null;
-            this.reset    = true;
-            this.operator = '';
-            str = 'Error';
-            console.warn('Number Too Large');
+            if (str.includes('.')) {
+                // Round Decimals
+                const decimal = parseFloat(str).toFixed(7);
+                str = decimal.toString();
+                //todo loop to test fixed vs max
+            } else {
+                // Show Error
+                this.memory   = null;
+                this.reset    = true;
+                this.operator = '';
+                str = 'Error';
+            }
         }
 
         // Reverse String
