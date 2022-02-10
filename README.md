@@ -8,7 +8,7 @@ https://deanwagner.github.io/calculator/
 
 This project was created for the [Calculator assignment](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/calculator) as part of [The Odin Project](https://www.theodinproject.com) curriculum. I met all the assignment objectives and then expanded on it with my own concepts to make it more functional and user-friendly.
 
-The most noteworthy aspect of this project is the faux liquid crystal display. Rather than simply displaying the raw i/o I created this display to simulate a real calculator. In the markup just one SVG digit is defined with seven LCD pixels that can be turned on/off individually with JavaScript and CSS. When the page is loaded the single SVG digit is cloned and repeated to create the ten digit display. When data is to be displayed the string is parsed and each number/character is associated with a corresponding item in the predefined pixel matrix, which dictates which of the individual LCD pixels are to be activated for each number/character to be displayed.
+The most noteworthy aspect of this project is the faux liquid crystal display. Rather than simply displaying the raw i/o I created this display to simulate a real calculator. In the markup just one SVG digit is defined with seven LCD pixels that can be turned on/off individually with JavaScript and CSS. When the page is loaded the single SVG digit is cloned and repeated to create the ten digit display. When data is to be displayed the string is parsed and each character is associated with a corresponding item in the predefined pixel matrix, which dictates which of the individual LCD pixels are to be activated for each character to be displayed.
 
 ### Assets Supplied
 
