@@ -400,9 +400,24 @@ class Calculator {
         if (str.length > this.maxDigits) {
             if (str.includes('.')) {
                 // Round Decimals
-                const decimal = parseFloat(str).toFixed(7);
-                str = decimal.toString();
-                //todo loop to test fixed vs max
+                let decimal;
+                for (let i = this.maxDigits; i > 0; i--) {
+                    decimal = parseFloat(str).toFixed(i);
+                    if (decimal.toString().length <= this.maxDigits) {
+                        i = 0;
+                    }
+                }
+
+                if (decimal.toString().length > this.maxDigits) {
+                    // Show Error
+                    this.memory   = null;
+                    this.reset    = true;
+                    this.operator = '';
+                    str = 'Error';
+                } else {
+                    str = decimal.toString();
+                }
+
             } else {
                 // Show Error
                 this.memory   = null;
