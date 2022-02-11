@@ -3,7 +3,17 @@
 /**
  * LCD Calculator App
  * @class
- * @author  Dean Wagner <info@deanwagner.net>
+ * @property {number}  maxDigits - Max LCD Digits in the Display
+ * @property {string}  display   - String to be Displayed in LCD Screen
+ * @property {number}  memory    - Previously Entered Digit
+ * @property {string}  operator  - String Representation of Mathematical Operator
+ * @property {boolean} reset     - Reset Screen Flag
+ * @property {boolean} decimal   - Decimal Used Flag
+ * @property {boolean} finished  - Finished Operation Flag
+ * @property {array}   pixels    - LCD Pixel Names
+ * @property {array}   keys      - Valid Keyboard Inputs
+ * @property {array}   matrix    - LCD Pixel Matrix
+ * @author Dean Wagner <info@deanwagner.net>
  */
 class Calculator {
 
@@ -30,8 +40,8 @@ class Calculator {
 
     // Valid Keyboard Inputs
     keys = [
-        '1', '2', '3', '4', '5',
-        '6', '7', '8', '9', '0',
+        '0', '1', '2', '3', '4',
+        '5', '6', '7', '8', '9',
         '+', '-', '*', '/', '.',
         'Enter', 'Backspace', 'Delete'
     ];
@@ -68,9 +78,9 @@ class Calculator {
         this.matrix['-'] = [ 0, 0, 0, 1, 0, 0, 0, 0 ];
 
         // Get SVG Template
-        const screen   = document.getElementById('lcd_screen');
-        const baseSVG  = document.getElementById('lcd_digit');
-        const newSVG   = baseSVG.cloneNode(true);
+        const screen  = document.getElementById('lcd_screen');
+        const baseSVG = document.getElementById('lcd_digit');
+        const newSVG  = baseSVG.cloneNode(true);
         screen.innerHTML = '';
 
         // Build LCD Screen from SVG Template
@@ -235,19 +245,19 @@ class Calculator {
                     result = 'Error';
             }
 
-            // Debug - Activate with #debug at end of URL
-            if (window.location.hash === 'debug') {
-                const debug = {
-                    'Decimal'  : this.decimal,
-                    'Display'  : this.display,
-                    'Parsed'   : screen,
-                    'Memory'   : this.memory,
-                    'Operator' : this.operator,
-                    'Result'   : result,
-                    'String'   : result.toString()
-                };
-                console.table(debug);
-            }
+            /*
+            // Debug
+            const debug = {
+                'Decimal'  : this.decimal,
+                'Display'  : this.display,
+                'Parsed'   : screen,
+                'Memory'   : this.memory,
+                'Operator' : this.operator,
+                'Result'   : result,
+                'String'   : result.toString()
+            };
+            console.table(debug);
+            */
 
             if (result === 'Error') {
                 // Handle Error
