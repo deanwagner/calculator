@@ -81,7 +81,7 @@ class Screen {
             screen.prepend(svg);
         }
 
-        // Show Screen
+        // Show Screen (this is to avoid FOUC on slow load)
         screen.style.display = 'flex';
     }
 
