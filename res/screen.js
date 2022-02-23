@@ -80,6 +80,9 @@ class Screen {
             // Add to DOM
             screen.prepend(svg);
         }
+
+        // Show Screen
+        screen.style.display = 'flex';
     }
 
     /**
