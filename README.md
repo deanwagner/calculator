@@ -25,10 +25,10 @@ The most noteworthy aspect of this project is the faux liquid crystal display. R
 7. Round long decimal numbers to avoid overflow
 8. 'Clear' button should wipe all existing data
 9. Error message for divide-by-zero
-10. (+1) Decimal button for floating point numbers
-11. (+1) Different colors for operation and number buttons
-12. (+1) 'Backspace' button for wrong entries
-13. (+1) Keyboard support
+10. (+) Decimal button for floating point numbers
+11. (+) Different colors for operation and number buttons
+12. (+) 'Backspace' button for wrong entries
+13. (+) Keyboard support
 
 ### Scope Creep
 
