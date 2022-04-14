@@ -82,26 +82,26 @@ class Calculator {
         this.compute.resetOperation();
 
         // Route Button Event
-        switch (true) {
-            case (event.key === 'Delete'):
+        switch (event.key) {
+            case 'Delete':
                 this.compute.clear();
                 break;
-            case (event.key === 'Backspace'):
+            case 'Backspace':
                 this.compute.back();
                 break;
-            case (event.key === '+'):
+            case '+':
                 this.compute.operate('+');
                 break;
-            case (event.key === '-'):
+            case '-':
                 this.compute.operate('-');
                 break;
-            case (event.key === '*'):
+            case '*':
                 this.compute.operate('*');
                 break;
-            case (event.key === '/'):
+            case '/':
                 this.compute.operate('/');
                 break;
-            case (event.key === 'Enter'):
+            case 'Enter':
                 this.compute.equals();
                 break;
             default:
@@ -120,26 +120,26 @@ class Calculator {
         this.compute.resetOperation();
 
         // Route Button Event
-        switch (true) {
-            case (button.id === 'btn_c'):
+        switch (button.id) {
+            case 'btn_c':
                 this.compute.clear();
                 break;
-            case (button.id === 'btn_b'):
+            case 'btn_b':
                 this.compute.back();
                 break;
-            case (button.id === 'btn_a'):
+            case 'btn_a':
                 this.compute.operate('+');
                 break;
-            case (button.id === 'btn_s'):
+            case 'btn_s':
                 this.compute.operate('-');
                 break;
-            case (button.id === 'btn_m'):
+            case 'btn_m':
                 this.compute.operate('*');
                 break;
-            case (button.id === 'btn_d'):
+            case 'btn_d':
                 this.compute.operate('/');
                 break;
-            case (button.id === 'btn_e'):
+            case 'btn_e':
                 this.compute.equals();
                 break;
             default:
@@ -156,22 +156,22 @@ class Calculator {
      * @returns {string} - Button ID
      */
     getID(key) {
-        switch (true) {
-            case (key === 'Delete'):
+        switch (key) {
+            case 'Delete':
                 return 'btn_c';
-            case (key === 'Backspace'):
+            case 'Backspace':
                 return 'btn_b';
-            case (key === '+'):
+            case '+':
                 return 'btn_a';
-            case (key === '-'):
+            case '-':
                 return 'btn_s';
-            case (key === '*'):
+            case '*':
                 return 'btn_m';
-            case (key === '/'):
+            case '/':
                 return 'btn_d';
-            case (key === '.'):
+            case '.':
                 return 'btn_p';
-            case (key === 'Enter'):
+            case 'Enter':
                 return 'btn_e';
             default:
                 return 'btn_' + key;

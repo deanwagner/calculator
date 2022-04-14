@@ -50,14 +50,14 @@ class Screen {
 
         // LCD Pixel Matrix: Characters
         this.matrix['_'] = [ 0, 0, 0, 0, 0, 0, 0, 0 ];
+        this.matrix['.'] = [ 0, 0, 0, 0, 0, 0, 0, 1 ];
+        this.matrix['-'] = [ 0, 0, 0, 1, 0, 0, 0, 0 ];
         this.matrix['E'] = [ 1, 1, 0, 1, 1, 0, 1, 0 ];
         this.matrix['r'] = [ 0, 0, 0, 1, 1, 0, 0, 0 ];
         this.matrix['o'] = [ 0, 0, 0, 1, 1, 1, 1, 0 ];
         this.matrix['H'] = [ 0, 1, 1, 1, 1, 1, 0, 0 ];
         this.matrix['L'] = [ 0, 1, 0, 0, 1, 0, 1, 0 ];
         this.matrix['O'] = [ 1, 1, 1, 0, 1, 1, 1, 0 ];
-        this.matrix['.'] = [ 0, 0, 0, 0, 0, 0, 0, 1 ];
-        this.matrix['-'] = [ 0, 0, 0, 1, 0, 0, 0, 0 ];
 
         // Get SVG Template
         const screen  = document.getElementById('lcd_screen');

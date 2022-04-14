@@ -1,5 +1,5 @@
 # LCD Calculator
-### LCD Calculator using an SVG Display
+### LCD Calculator with an SVG Display
 
 Live Demo:  
 https://deanwagner.github.io/calculator/

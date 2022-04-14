@@ -52,17 +52,17 @@ class Operations {
             let result;
 
             // Perform Operation
-            switch (true) {
-                case (this.operator === '+'):
+            switch (this.operator) {
+                case '+':
                     result = this.add(this.memory, screen);
                     break;
-                case (this.operator === '-'):
+                case '-':
                     result = this.subtract(this.memory, screen);
                     break;
-                case (this.operator === '*'):
+                case '*':
                     result = this.multiply(this.memory, screen);
                     break;
-                case (this.operator === '/'):
+                case '/':
                     result = (screen === 0) ? 'LOL' : this.divide(this.memory, screen);
                     break; // ^ Divide-by-Zero Check ^
                 default:
@@ -244,11 +244,7 @@ class Operations {
      * Remove Last Character
      */
     back() {
-        if (this.display.length > 1) {
-            this.display = this.display.slice(0, -1);
-        } else {
-            this.display = '0';
-        }
+        this.display = (this.display.length > 1) ? this.display.slice(0, -1) : '0';
     }
 
     /**
