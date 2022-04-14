@@ -71,7 +71,7 @@ class Operations {
 
             /*
             // Debug
-            const debug = {
+            console.table({
                 'Decimal'  : this.decimal,
                 'Display'  : this.display,
                 'Parsed'   : screen,
@@ -79,8 +79,7 @@ class Operations {
                 'Operator' : this.operator,
                 'Result'   : result,
                 'String'   : result.toString()
-            };
-            console.table(debug);
+            });
             */
 
             if ((result === 'Error') || (result === 'LOL')) {
